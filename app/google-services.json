@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "353699987734",
+    "project_id": "happyflo-eb223",
+    "storage_bucket": "happyflo-eb223.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353699987734:android:95e07b89eb6bf2b1215037",
+        "android_client_info": {
+          "package_name": "com.example.happyflo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353699987734-0f2curq69g3rjp1nt76t8sqpj30j1tti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBCQ31Y5JoovP7JJpPRHSIOIi82uTY2Dw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353699987734-0f2curq69g3rjp1nt76t8sqpj30j1tti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
