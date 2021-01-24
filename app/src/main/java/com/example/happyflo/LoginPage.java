@@ -76,69 +76,69 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
-        next.setOnClickListener(new View.OnClickListener() {
+            next.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-           //     Toast.makeText(LoginPage.this, "Verify Clicked", Toast.LENGTH_SHORT).show();
-                if (!phone.getText().toString().isEmpty() && phone.getText().toString().length() == 10) {
-                    if (!verificationOnProgress) {
-                        next.setEnabled(false);
-
-
-                        String phoneText = phone.getText().toString();
-                        phoneNum = "+" + countryCodePicker.getSelectedCountryCode() + phoneText;
+                @Override
+                public void onClick(View v) {
+               //     Toast.makeText(LoginPage.this, "Verify Clicked", Toast.LENGTH_SHORT).show();
+                    if (!phone.getText().toString().isEmpty() && phone.getText().toString().length() == 10) {
+                        if (!verificationOnProgress) {
+                            next.setEnabled(false);
 
 
-                        DatabaseReference mobileNoRef = user.child(phoneNum);
-                        ValueEventListener eventListener = new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    final String phoneNum2 = phoneNum;
-                                    progressBar.setVisibility(View.VISIBLE);
-                                    state.setText("Sending OTP");
-                                    state.setVisibility(View.VISIBLE);
-                                    //interestSelected=dataSnapshot.child(phoneNum2).child("choiceSelected").getValue().toString();
-                                    Log.d("phone", "Phone No.: " + phoneNum2);
-                                    requestPhoneAuth(phoneNum2);
+                            String phoneText = phone.getText().toString();
+                            phoneNum = "+" + countryCodePicker.getSelectedCountryCode() + phoneText;
 
 
-                                } else {
-                                    Toast.makeText(LoginPage.this, "Mobile Number not Registered", Toast.LENGTH_SHORT).show();
-                                    next.setEnabled(true);
+                            DatabaseReference mobileNoRef = user.child(phoneNum);
+                            ValueEventListener eventListener = new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        final String phoneNum2 = phoneNum;
+                                        progressBar.setVisibility(View.VISIBLE);
+                                        state.setText("Sending OTP");
+                                        state.setVisibility(View.VISIBLE);
+                                        //interestSelected=dataSnapshot.child(phoneNum2).child("choiceSelected").getValue().toString();
+                                        Log.d("phone", "Phone No.: " + phoneNum2);
+                                        requestPhoneAuth(phoneNum2);
+
+
+                                    } else {
+                                        Toast.makeText(LoginPage.this, "Mobile Number not Registered", Toast.LENGTH_SHORT).show();
+                                        next.setEnabled(true);
+                                    }
                                 }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Log.d("Tag", databaseError.getMessage());
+
+                                }
+                            };
+                            mobileNoRef.addListenerForSingleValueEvent(eventListener);
+
+                        } else {
+                            next.setEnabled(false);
+                            optEnter.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.VISIBLE);
+                            state.setText("Verfying OTP");
+                            state.setVisibility(View.VISIBLE);
+                            otpCode = optEnter.getText().toString();
+                            if (otpCode.isEmpty()) {
+                                optEnter.setError("OTP Required");
+                                return;
                             }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                Log.d("Tag", databaseError.getMessage());
-
-                            }
-                        };
-                        mobileNoRef.addListenerForSingleValueEvent(eventListener);
-
-                    } else {
-                        next.setEnabled(false);
-                        optEnter.setVisibility(View.GONE);
-                        progressBar.setVisibility(View.VISIBLE);
-                        state.setText("Verfying OTP");
-                        state.setVisibility(View.VISIBLE);
-                        otpCode = optEnter.getText().toString();
-                        if (otpCode.isEmpty()) {
-                            optEnter.setError("OTP Required");
-                            return;
+                            credential = PhoneAuthProvider.getCredential(verificationId, otpCode);
+                            verifyAuth(credential);
                         }
 
-                        credential = PhoneAuthProvider.getCredential(verificationId, otpCode);
-                        verifyAuth(credential);
+                    } else {
+                        phone.setError("Valid Phone Number Required");
                     }
-
-                } else {
-                    phone.setError("Valid Phone Number Required");
                 }
-            }
-        });
+            });
 
         SignUpSetOnClickListener();
         ContactSetListener();
@@ -231,7 +231,7 @@ public class LoginPage extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginPage.this, Registration.class));
+                startActivity(new Intent(LoginPage.this, OTPActivity.class));
 
             }
         });

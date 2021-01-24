@@ -4,6 +4,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F25278"
     tools:context=".Registration">
+
+    <TextView
+        android:id="@+id/textViewIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Help us to know you better"
+        android:textColor="#FFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+
+        android:foregroundGravity="center"
+        android:layout_marginTop="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="235dp"
+        android:layout_height="51dp"
+        android:ems="10"
+        android:hint="Name"
+        android:textColor="#FFF"
+        android:layout_marginTop="50dp"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@id/dob"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewIntro" />
+
+
+    <TextView
+        android:id="@+id/dob"
+        android:layout_width="235dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:textColor="#FFF"
+        android:hint="Select Your DOB"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="normal"
+        android:translationZ="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <TextView
+        android:id="@+id/dop"
+        android:layout_width="235dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:textColor="#FFF"
+        android:hint="Your Last Period Date"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="normal"
+        android:translationZ="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dob" />
+
+
+    <Button
+        android:id="@+id/signupBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dop"
+        android:background="#FFF"
+        android:text="Submit"
+        android:gravity="center"
+
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/logInPage"
+        android:layout_width="210dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="20dp"
+        android:breakStrategy="high_quality"
+        android:text="Already have an account? Login"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#FFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupBtn" />
+
+    <TextView
+        android:id="@+id/contactReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="116dp"
+        android:text="Having Trouble? Contact Us "
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logInPage" />
+
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="90dp" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
