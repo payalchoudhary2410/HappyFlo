@@ -1,4 +1,4 @@
-# HappyFlo
+# HappieFlo
 
 Your complete partner to cope mental stress and mood swings during periods! Elevate your mental health with HappieFlo!
 
