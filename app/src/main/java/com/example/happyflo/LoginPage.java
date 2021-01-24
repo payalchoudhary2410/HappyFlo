@@ -2,7 +2,10 @@ package com.example.happyflo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.RemoteInput;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +31,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rilixtech.widget.countrycodepicker.CountryCodePicker;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
+
+
 import java.util.concurrent.TimeUnit;
 
 public class LoginPage extends AppCompatActivity {
@@ -50,6 +58,30 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
+        createNotificationChannel();
+
+        Button notifyBtn= findViewById(R.id.notify_button);
+        notifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginPage.this, "Notifications allowed!",Toast.LENGTH_SHORT ).show();
+                Intent intent =  new Intent(LoginPage.this, Notifications.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(LoginPage.this, 0,intent,0);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+                long start_time = System.currentTimeMillis();
+                long ten_seconds = 10*1000;
+
+                alarmManager.set(AlarmManager.RTC_WAKEUP, start_time + ten_seconds, pendingIntent);
+//                alarmManager.set(AlarmManager.RTC_WAKEUP, start_time + 5*ten_seconds, pendingIntent);
+//                alarmManager.set(AlarmManager.RTC_WAKEUP, start_time + 10*ten_seconds, pendingIntent);
+//                alarmManager.set(AlarmManager.RTC_WAKEUP, start_time + 15*ten_seconds, pendingIntent);
+//                alarmManager.set(AlarmManager.RTC_WAKEUP, start_time + 20*ten_seconds, pendingIntent);
+
+
+
+            }
+        });
 
         phone = findViewById(R.id.phone1);
         optEnter = findViewById(R.id.codeEnter1);
@@ -142,6 +174,22 @@ public class LoginPage extends AppCompatActivity {
 
         SignUpSetOnClickListener();
         ContactSetListener();
+    }
+
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "HappyFlow Notification";
+            String description = "Channel for Notification";
+            int importance  = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notify",name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
+
+        }
+
     }
 
     private void requestPhoneAuth(String phoneNumber) {
